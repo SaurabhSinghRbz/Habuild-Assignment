@@ -16,8 +16,8 @@ function TodoList() {
     }
 
     const handleEdit = (id) => {
-        let newTodo = prompt("Edit Todo")
-        if (newTodo != "") {
+        let newTodo = prompt("Edit Todo..")
+        if (newTodo != "" && newTodo != null) {
             dispatch(editTodo({
                 id,
                 todo: {
