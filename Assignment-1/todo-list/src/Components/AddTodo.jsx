@@ -16,13 +16,11 @@ function AddTodo() {
         if (input === "") {
             return addToast("Please enter a todo", { appearance: 'warning' });
         }
-
         let newTodo = {
             id,
             title: input,
             status: false,
         }
-
         dispatch(addTodo(newTodo))
         addToast("Todo added successfully", { appearance: 'success' });
         setInput("")

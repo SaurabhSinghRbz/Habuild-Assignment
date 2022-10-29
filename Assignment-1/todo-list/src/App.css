@@ -56,7 +56,7 @@ button:hover {
 }
 
 
-
+/* todo list -- > */
 .todo {
   display: flex;
   width: 100%;
@@ -64,8 +64,7 @@ button:hover {
   border-bottom: 1px solid grey;
   align-items: flex-end;
   justify-content: space-between;
-  padding-bottom: 5px;
-
+  padding-bottom: 2px;
 }
 
 .todo>:first-child {
@@ -76,12 +75,12 @@ button:hover {
 .todo input {
   width: 17px;
   height: 17px;
-  margin: 0 10px;
+  margin-right: 10px;
 }
 
 .todo-btns>svg {
-  width: 20px;
-  height: 20px;
+  width: 18px;
+  height: 18px;
   color: rgb(209, 0, 0);
   cursor: pointer;
 }
