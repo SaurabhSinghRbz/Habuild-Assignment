@@ -1,7 +1,28 @@
 import { ADD_TODO, DELETE_TODO, EDIT_TODO, TOGGLE_STATUS } from "./actionTypes";
 
 const initialState = {
-    todos: []
+    todos: [
+        {
+            id: 1,
+            title: "Eat",
+            status: false,
+        },
+        {
+            id: 2,
+            title: "Code",
+            status: false,
+        },
+        {
+            id: 3,
+            title: "Sleep",
+            status: false,
+        },
+        {
+            id: 4,
+            title: "Repeat",
+            status: false,
+        }
+    ]
 };
 
 const reducer = (state = initialState, action) => {
@@ -17,7 +38,7 @@ const reducer = (state = initialState, action) => {
                 todos: state.todos.map((todo) => {
                     if (todo.id === action.payload.id) {
                         return {
-                            ...todo, todo: action.payload.todo
+                            ...todo, ...action.payload.todo
                         };
                     }
                     return todo;

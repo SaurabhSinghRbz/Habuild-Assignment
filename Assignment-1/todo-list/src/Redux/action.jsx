@@ -15,10 +15,10 @@ export const deleteTodo = (id) => {
     };
 }
 
-export const editTodo = (id, todo) => {
+export const editTodo = (data) => {
     return {
         type: EDIT_TODO,
-        payload: { id, todo },
+        payload: data,
     };
 }
 
