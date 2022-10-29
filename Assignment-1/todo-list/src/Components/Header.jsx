@@ -2,7 +2,7 @@ import React from 'react'
 
 function Header() {
   return (
-    <div>Header</div>
+    <h1 style={{ textAlign: "center", fontSize: "40px", fontFamily: "cursive" }}>Todo List</h1>
   )
 }
 

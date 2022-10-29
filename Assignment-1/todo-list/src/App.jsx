@@ -1,9 +1,15 @@
 import './App.css';
+import AddTodo from './Components/AddTodo';
+import Header from './Components/Header';
+import TodoList from './Components/TodoList';
 
 function App() {
   return (
     <div>
-      <h1>Todo List</h1>
+      <Header />
+      <div className='container'>
+        <AddTodo />
+      </div>
     </div>
   );
 }

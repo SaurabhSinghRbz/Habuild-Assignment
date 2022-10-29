@@ -1,5 +1,81 @@
 * {
   margin: 0;
   padding: 0;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-family: sans-serif;
+  box-sizing: border-box;
+}
+
+body {
+  width: 100%;
+  height: 100vh;
+  background: linear-gradient(to right, #4df18c, #a4ffca, #c9fae1);
+}
+
+.container {
+  max-width: 60%;
+  height: auto;
+  background: #fff;
+  margin: 50px auto;
+  padding: 25px;
+  border-radius: 10px;
+  border: 1px solid darkgray;
+}
+
+/*  adding a todo */
+.add-todo form {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.add-todo input {
+  min-width: 80%;
+  height: 45px;
+  border-radius: 10px 0 0 10px;
+  padding: 0 10px;
+  font-size: 20px;
+  border: 1px solid grey;
+}
+
+.add-todo button {
+  width: auto;
+  height: 45px;
+  border-radius: 0 10px 10px 0;
+  border: none;
+  background: #23f156;
+  color: #fff;
+  font-size: 20px;
+  cursor: pointer;
+  padding: 5px;
+}
+
+
+@media screen and (max-width: 800px) {
+  .container {
+    max-width: 90%;
+  }
+
+  .add-todo input {
+    min-width: 70%;
+  }
+
+  .add-todo button {
+    font-size: 16px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .container {
+    max-width: 100%;
+  }
+
+  .add-todo input {
+    min-width: 80%;
+  }
+
+  .add-todo button {
+    font-size: 14px;
+  }
 }
