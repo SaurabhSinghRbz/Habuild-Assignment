@@ -1,10 +1,11 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { addTodo } from '../Redux/action'
-
+import { useToasts } from 'react-toast-notifications';
 function AddTodo() {
     const [input, setInput] = React.useState("")
     const dispatch = useDispatch()
+    const { addToast } = useToasts();
     const todos = useSelector(state => state.todos)
     let id = 0;
     if (todos.length > 0) {
@@ -12,6 +13,10 @@ function AddTodo() {
     }
     const handleSubmit = (e) => {
         e.preventDefault();
+        if (input === "") {
+            return addToast("Please enter a todo", { appearance: 'warning' });
+        }
+
         let newTodo = {
             id,
             title: input,
@@ -19,6 +24,7 @@ function AddTodo() {
         }
 
         dispatch(addTodo(newTodo))
+        addToast("Todo added successfully", { appearance: 'success' });
         setInput("")
     }
 
