@@ -6,7 +6,8 @@ function Board({ playerX, playerO, gameStarted, setGameStarted }) {
     const [isXTurn, setIsXTurn] = React.useState(true)
     const [playerXScore, setPlayerXScore] = React.useState(0)
     const [playerOScore, setPlayerOScore] = React.useState(0)
-
+    const [winner, setWinner] = React.useState(null)
+    const [draw, setDraw] = React.useState(false)
 
     const checkWinner = () => {
         const winnerLogic = [
@@ -41,29 +42,43 @@ function Board({ playerX, playerO, gameStarted, setGameStarted }) {
     const isDraw = checkDraw();
 
     const handleClick = (index) => {
-        if (board[index] !== null) {
+        if (board[index] !== null || isWinner || isDraw) {
             return
         }
-        const copyState = [...board]
-        copyState[index] = isXTurn ? "X" : "O"
-        setBoard(copyState)
+        const newBoard = [...board]
+        newBoard[index] = isXTurn ? 'X' : 'O'
+        setBoard(newBoard)
         setIsXTurn(!isXTurn)
     }
 
-    const handleReset = () => {
-        if (!isDraw) {
-            if (isWinner === "X") {
+    const handlePlayAgain = () => {
+        setBoard(Array(9).fill(null))
+        setWinner(null)
+        setDraw(false)
+    }
+
+    React.useEffect(() => {
+        if (isWinner) {
+            setWinner(isWinner);
+            if (isXTurn) {
+                setPlayerOScore(playerOScore + 1)
+            } else {
                 setPlayerXScore(playerXScore + 1)
             }
-            else if (isWinner === "O") {
-                setPlayerOScore(playerOScore + 1)
-            }
+            setDraw(false)
         }
-        setBoard(Array(9).fill(null))
-    }
+        if (isDraw) {
+            setDraw(true)
+        }
+    }, [isWinner, isDraw])
+
 
     const handleRestart = () => {
         setBoard(Array(9).fill(null))
+        setPlayerXScore(0)
+        setPlayerOScore(0)
+        setWinner(null)
+        setDraw(false)
         setGameStarted(false)
     }
 
@@ -77,54 +92,46 @@ function Board({ playerX, playerO, gameStarted, setGameStarted }) {
 
     return (
         <div className='board playersBox' style={{ display: gameStarted ? "" : "none" }}>
-
             <p>Score</p>
             <div className='scoreBoard'>
                 <div className='score'>
                     <p>Player X : {player1}</p>
-                    {(isWinner === 'X' && !isDraw) ? <p>Score : {playerXScore + 1}</p> : <p>Score : {playerXScore}</p>}
+                    <p>Score : {playerXScore}</p>
 
                 </div>
                 <div className='score'>
                     <p>Player O : {player2}</p>
-                    {(isWinner === 'O' && !isDraw) ? <p>Score : {playerOScore + 1}</p> : <p>Score : {playerOScore}</p>}
+                    <p>Score : {playerOScore}</p>
                 </div>
             </div>
-            {isWinner ? (
-                <>
-                    {isDraw ? (
-                        <>
-                            <p className='winner'>Match Draw !!</p>
-                            <button className='button' onClick={handleReset}>Play Again</button>
-                            <button className='button' onClick={handleRestart}>Restart</button>
-                        </>
-                    ) : (
-                        <>
-                            {isWinner === "X" ? <p className='winner'>{player1} won the game !!</p> : <p className='winner'>{player2} won the game !!</p>}
-                            <button onClick={handleReset} className="button">Play Again</button>
-                            <button onClick={handleRestart} className="button">Restart The Game</button>
-                        </>
-                    )}
-                </>
-            ) : (
-                <>
-                    <div className='row'>
-                        <Square onClick={() => handleClick(0)} value={board[0]} />
-                        <Square onClick={() => handleClick(1)} value={board[1]} />
-                        <Square onClick={() => handleClick(2)} value={board[2]} />
-                    </div>
-                    <div className='row'>
-                        <Square onClick={() => handleClick(3)} value={board[3]} />
-                        <Square onClick={() => handleClick(4)} value={board[4]} />
-                        <Square onClick={() => handleClick(5)} value={board[5]} />
-                    </div>
-                    <div className='row'>
-                        <Square onClick={() => handleClick(6)} value={board[6]} />
-                        <Square onClick={() => handleClick(7)} value={board[7]} />
-                        <Square onClick={() => handleClick(8)} value={board[8]} />
-                    </div>
-                </>
-            )}
+            {winner ? (<>
+                <div className='winner'>{winner == 'X' ? player1 : player2} is winner !!</div>
+                <button className="button" onClick={handlePlayAgain}>Play Again</button>
+                <button className='button' onClick={handleRestart}>Restart The Game</button>
+            </>) : draw ? (<>
+                <div className='winner'>Game Draw !!</div>
+                <button className="button" onClick={handlePlayAgain}>Play Again</button>
+                <button className='button' onClick={handleRestart}>Restart The Game</button>
+            </>)
+                : (
+                    <>
+                        <div className='row'>
+                            <Square onClick={() => handleClick(0)} value={board[0]} />
+                            <Square onClick={() => handleClick(1)} value={board[1]} />
+                            <Square onClick={() => handleClick(2)} value={board[2]} />
+                        </div>
+                        <div className='row'>
+                            <Square onClick={() => handleClick(3)} value={board[3]} />
+                            <Square onClick={() => handleClick(4)} value={board[4]} />
+                            <Square onClick={() => handleClick(5)} value={board[5]} />
+                        </div>
+                        <div className='row'>
+                            <Square onClick={() => handleClick(6)} value={board[6]} />
+                            <Square onClick={() => handleClick(7)} value={board[7]} />
+                            <Square onClick={() => handleClick(8)} value={board[8]} />
+                        </div>
+                    </>
+                )}
         </div>
 
     )
