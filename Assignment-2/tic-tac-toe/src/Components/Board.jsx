@@ -105,7 +105,7 @@ function Board({ playerX, playerO, gameStarted, setGameStarted }) {
                 </div>
             </div>
             {winner ? (<>
-                <div className='winner'>{winner == 'X' ? player1 : player2} is winner !!</div>
+                <div className='winner'>{winner === 'X' ? player1 : player2} is winner !!</div>
                 <button className="button" onClick={handlePlayAgain}>Play Again</button>
                 <button className='button' onClick={handleRestart}>Restart The Game</button>
             </>) : draw ? (<>
@@ -115,6 +115,7 @@ function Board({ playerX, playerO, gameStarted, setGameStarted }) {
             </>)
                 : (
                     <>
+                        <p className='turn'>{isXTurn ? player1 : player2}'s turn</p>
                         <div className='row'>
                             <Square onClick={() => handleClick(0)} value={board[0]} />
                             <Square onClick={() => handleClick(1)} value={board[1]} />

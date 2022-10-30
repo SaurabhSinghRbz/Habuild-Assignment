@@ -138,6 +138,12 @@ body {
 
 }
 
+.turn {
+  font-size: 1.6rem;
+  color: white;
+  text-transform: capitalize;
+  margin-bottom: 10px;
+}
 
 @media screen and (max-width: 768px) {
   .playersBox {
