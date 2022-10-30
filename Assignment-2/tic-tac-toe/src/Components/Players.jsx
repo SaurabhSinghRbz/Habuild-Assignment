@@ -7,7 +7,7 @@ function Players({ playerX, setPlayerX, playerO, setPlayerO, gameStarted, setGam
             <input type='text' placeholder='Enter Player X Name' value={playerX} onChange={(e) => setPlayerX(e.target.value)} />
             <p className='playerName'>Player O Name</p>
             <input type='text' placeholder='Enter Player O Name' value={playerO} onChange={(e) => setPlayerO(e.target.value)} />
-            <button className='startBtn' onClick={() => setGameStarted(true)}>Start</button>
+            <button className='button' onClick={() => setGameStarted(true)}>Start</button>
         </div>
     )
 }
